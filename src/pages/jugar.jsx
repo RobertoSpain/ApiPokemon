@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Jugar.css";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 export default function Jugar() {
   const [pokemon, setPokemon] = useState(null);
@@ -27,7 +30,7 @@ export default function Jugar() {
       }, 1000);
 
       return () => clearTimeout(timer);
-    } else if (contadorPista === 0 && intentos >= 3) {
+    } else if (contadorPista === 0 && intentos >= 3 && pokemon) {
       const tipos = pokemon.types.map((tipo) => tipo.type.name).join(", ");
       setPista(`Pista: Es de tipo ${tipos}`);
     }
@@ -40,17 +43,19 @@ export default function Jugar() {
       .then((data) => {
         setPokemon(data);
         setRevelar(false);
-        setMensaje("");
-        setRespuesta("");
-        setIntentos(0);
-        setIntentosRestantes(3);
-        setContadorPista(0);
-        setPista("");
-        setBotonSonidoDesbloqueado(false);
+        resetEstado();
       })
-      .catch((error) => {
-        console.error("Error al cargar el Pokémon:", error);
-      });
+      .catch(() => setMensaje("Error al cargar el Pokémon. Inténtalo nuevamente."));
+  }
+
+  function resetEstado() {
+    setMensaje("");
+    setRespuesta("");
+    setIntentos(0);
+    setIntentosRestantes(3);
+    setContadorPista(0);
+    setPista("");
+    setBotonSonidoDesbloqueado(false);
   }
 
   function reproducirSonido() {
@@ -60,42 +65,61 @@ export default function Jugar() {
     }
   }
 
+  function guardarPuntuacion(puntos) {
+    const auth = getAuth();
+    const usuario = auth.currentUser;
+
+    if (!usuario) return;
+
+    addDoc(collection(db, "rankings"), {
+      userId: usuario.uid,
+      nombre: usuario.displayName || usuario.email,
+      puntos: puntos,
+      timestamp: new Date(),
+    }).catch((err) => console.error("Error al guardar la puntuación:", err));
+  }
+
   function verificarRespuesta() {
-    if (!pokemon) return;
+    if (!pokemon || respuesta.trim() === "") {
+      setMensaje("Por favor, escribe una respuesta antes de verificar.");
+      return;
+    }
 
     if (respuesta.toLowerCase() === pokemon.name.toLowerCase()) {
       setMensaje(`¡Correcto! Era ${pokemon.name}`);
       setRevelar(true);
-      setPuntos((prevPuntos) => {
-        const nuevosPuntos = prevPuntos + 1;
-        if (nuevosPuntos > record) {
-          setRecord(nuevosPuntos);
-          localStorage.setItem("recordPuntos", nuevosPuntos);
-        }
-        return nuevosPuntos;
-      });
 
-      setTimeout(() => {
-        cargarPokemon();
-      }, 1500);
-
-    } else {
-      const nuevoIntento = intentos + 1;
-      setIntentos(nuevoIntento);
-      setRespuesta("");
-      setIntentosRestantes(Math.max(3 - nuevoIntento, 0));
-
-      if (nuevoIntento === 3) {
-        setMensaje("Fallaste 3 veces. La pista aparecerá en 5 segundos...");
-        setContadorPista(5);
-      } else if (nuevoIntento === 4) {
-        setMensaje("Te queda 1 fallo para desbloquear el sonido.");
-      } else if (nuevoIntento === 5) {
-        setMensaje("Se ha desbloqueado el sonido del Pokémon.");
-        setBotonSonidoDesbloqueado(true);
-      } else {
-        setMensaje("");
+      const nuevosPuntos = puntos + 1;
+      if (nuevosPuntos > record) {
+        setRecord(nuevosPuntos);
+        localStorage.setItem("recordPuntos", nuevosPuntos);
       }
+
+      guardarPuntuacion(nuevosPuntos);
+      setPuntos(nuevosPuntos);
+
+      setTimeout(cargarPokemon, 1500);
+    } else {
+      manejarFallo();
+    }
+  }
+
+  function manejarFallo() {
+    const nuevoIntento = intentos + 1;
+    setIntentos(nuevoIntento);
+    setRespuesta("");
+    setIntentosRestantes(3 - nuevoIntento);
+
+    if (nuevoIntento === 3) {
+      setMensaje("Fallaste 3 veces. La pista aparecerá en 5 segundos...");
+      setContadorPista(5);
+    } else if (nuevoIntento === 4) {
+      setMensaje("Te queda 1 fallo para desbloquear el sonido.");
+    } else if (nuevoIntento === 5) {
+      setMensaje("Se ha desbloqueado el sonido del Pokémon.");
+      setBotonSonidoDesbloqueado(true);
+    } else {
+      setMensaje("");
     }
   }
 

@@ -21,8 +21,7 @@ const app = initializeApp(firebaseConfig);
 
 // Exportar servicios para usarlos en otras partes de la aplicación
 export const analytics = getAnalytics(app);
-export const auth = getAuth(app); // Para autenticación
-export const db = getFirestore(app); // Para Firestore (base de datos)
-export const storage = getStorage(app); // Para Storage
-
-export default app; // Exporta la app por si necesitas inicializarla en otro lugar
+export const auth = getAuth(app);
+export const db = getFirestore(app); 
+export const storage = getStorage(app); 
+export default app;

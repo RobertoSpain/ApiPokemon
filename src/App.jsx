@@ -10,6 +10,9 @@ import CerrarSesion from "./pages/CerrarSesion";
 import DetallePokemon from "./components/DetallePokemon";
 import Error404 from "./components/error404";
 import Navbar from "./components/Navbar";
+import Ranking from "./components/Ranking";
+
+
 
 export default function App() {
   return (
@@ -22,6 +25,7 @@ export default function App() {
         <Route path="/pokemons" element={<Pokemons />} />
         <Route path="/detalle/:idPokemon" element={<DetallePokemon />} />
         <Route path="/cerrar-sesion" element={<CerrarSesion />} />
+        <Route path="/ranking" element={<Ranking />} />
         <Route path="*" element={<Error404 />} />
         {/* Ruta protegida */}
         <Route element={<RutasPrivadas />}>

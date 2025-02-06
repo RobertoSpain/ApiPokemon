@@ -51,7 +51,7 @@ export default function Pokemons() {
         }}
       >
         {listaPokemons.map((pokemon, index) => {
-          const id = pokemon.url.split("/")[pokemon.url.split("/").length - 2]; // Obtener ID del Pokémon
+          const id = pokemon.url.split("/")[pokemon.url.split("/").length - 2]; 
           return (
             <li
               key={index}

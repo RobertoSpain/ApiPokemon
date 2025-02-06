@@ -32,6 +32,7 @@ export default function Navbar() {
           <Link to="/">Inicio</Link>
           <Link to="/pokemons">Pokemons</Link>
           <Link to="/jugar">Jugar</Link>
+          <Link to="/ranking">Ranking</Link>
         </div>
         <div className="usuario-container">
           {usuario ? (

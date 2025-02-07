@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./Jugar.css";
+import "./jugar.css";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";

@@ -1,4 +1,4 @@
-/* General */
+/* 🎨 GENERAL */
 body {
   background: linear-gradient(120deg, #a8dadc, #457b9d);
   margin: 0;
@@ -13,21 +13,14 @@ body {
   text-align: center;
 }
 
-/* Contenedor principal */
-div {
-  text-align: center;
-  color: white;
-  padding: 20px;
-}
-
-/* Cabecera */
+/* 📌 CABECERA */
 h1 {
   color: #f1faee;
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
-/* Botones */
+/* 🎮 BOTONES */
 button, .inicio-button {
   margin-top: 20px;
   padding: 10px 20px;
@@ -62,12 +55,53 @@ button:hover {
   transform: scale(1.1);
 }
 
-.inicio-button:active {
-  transform: scale(0.95);
-  background: #ff0000;
+/* 📦 CONTENEDORES FLEXIBLES */
+.inicio-container {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(120deg, #0071e3, #00e5ff);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Lista de Pokémon */
+.inicio-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: auto;
+}
+
+.inicio-card {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inicio-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 📌 IMAGEN WALLPAPER RESPONSIVA */
+.wallpaper {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 📜 LISTA DE POKÉMONS */
 ul {
   display: flex;
   flex-wrap: wrap;
@@ -104,6 +138,7 @@ li:hover img {
   transform: scale(1.1);
 }
 
+/* 📝 TEXTO */
 p {
   color: #1d3557;
   font-size: 1.2rem;
@@ -111,95 +146,56 @@ p {
   margin: 0;
 }
 
-/* Inicio - Página */
-.inicio-container {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(120deg, #0071e3, #00e5ff);
-  min-height: 100vh;
-}
-
-.inicio-header {
-  margin-bottom: 30px;
-}
-
-.inicio-title {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.inicio-subtitle {
-  font-size: 1.5rem;
-  color: #ffde59;
-  font-weight: bold;
-}
-
-.inicio-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.inicio-section {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  max-width: 900px;
-  margin: auto;
-}
-
-.inicio-card {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 20px;
-  border-radius: 10px;
-  width: 250px;
-  text-align: center;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.inicio-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.inicio-image {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
-}
-
-.wallpaper {
-  width: 1000px; 
-  height: 450px; 
-  object-fit: cover; 
-  border-radius: 10px; 
-  margin: 20px auto; 
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
-}
-
-.cerrar-sesion {
-  margin-left: 10px;
-  padding: 5px 10px;
-  background-color: #e57373;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.cerrar-sesion:hover {
-  background-color: #d32f2f;
-}
-
-
-/* Footer */
+/* FOOTER */
 .inicio-footer {
   margin-top: 30px;
+  padding: 10px;
+}
+
+/* 📌 🔥 MEDIA QUERIES RESPONSIVE */
+
+/* 📱 MOVILES PEQUEÑOS (320px - 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .inicio-title {
+    font-size: 2.2rem;
+  }
+
+  .inicio-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inicio-card {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  .wallpaper {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .inicio-button {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* 📱 TABLETS (481px - 1024px) */
+@media (max-width: 1024px) {
+  .inicio-section {
+    justify-content: center;
+  }
+
+  .inicio-card {
+    width: 45%;
+  }
+
+  .wallpaper {
+    max-width: 90%;
+  }
 }

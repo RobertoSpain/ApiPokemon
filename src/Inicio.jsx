@@ -12,12 +12,9 @@ export default function Inicio() {
           Regístrate y prueba nuestro juego interactivo de Adivinar Pokémons con pistas y sonidos.
         </p>
       </header>
-      <div className="video-container">
-        <video autoPlay loop muted className="wallpaper">
-          <source src="/gengar.mp4" type="video/mp4" />
-          Tu navegador no soporta el elemento de video.
-        </video>
 
+      <div className="video-container">
+        <img src="/gengar.png" alt="Gengar" className="wallpaper" />
       </div>
 
       <section className="landing-content">

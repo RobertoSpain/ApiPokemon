@@ -1,0 +1,49 @@
+.ranking-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f8ff; /* Fondo general */
+  border-radius: 10px;
+}
+
+.ranking-titulo {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2c3e50; /* Título con un color azul oscuro */
+}
+
+.ranking-tabla {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.ranking-tabla th,
+.ranking-tabla td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 1.1rem;
+}
+
+.ranking-tabla th {
+  background-color: #4caf50; /* Verde intenso para los encabezados */
+  color: #ffffff; /* Texto blanco */
+  font-weight: bold;
+  text-transform: uppercase; /* Encabezados en mayúsculas */
+}
+
+.ranking-tabla tr:nth-child(even) {
+  background-color: #eafaf1; /* Fondo verde claro para filas pares */
+}
+
+.ranking-tabla tr:nth-child(odd) {
+  background-color: #ffffff; /* Fondo blanco para filas impares */
+}
+
+.ranking-tabla tr:hover {
+  background-color: #d4edda; /* Resaltado verde suave al pasar el ratón */
+}
+
+.ranking-tabla td {
+  color: #34495e; /* Texto azul oscuro */
+}

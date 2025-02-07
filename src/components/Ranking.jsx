@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../firebase";
+import { db } from "../firebase"; // Asegúrate de que la ruta sea correcta
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import "./Ranking.css";
 
@@ -10,20 +10,32 @@ export default function Ranking() {
   useEffect(() => {
     async function cargarRankings() {
       try {
+        console.log("Iniciando consulta a Firestore...");
+        // Referencia a la colección "rankings"
+        const rankingsRef = collection(db, "rankings");
+        // Crear la consulta: ordena por "puntos" descendente y limita a 10 resultados
         const q = query(
-          collection(db, "rankings"),
+          rankingsRef,
           orderBy("puntos", "desc"),
-          limit(10) 
+          limit(10)
         );
+        // Obtener los documentos que cumplen la consulta
         const querySnapshot = await getDocs(q);
-        const datosRankings = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        console.log("QuerySnapshot recibido:", querySnapshot);
+
+        // Mapear los documentos a un array de objetos
+        const datosRankings = querySnapshot.docs.map((doc) => {
+          console.log("Documento obtenido:", doc.id, doc.data());
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        });
+        console.log("Datos mapeados:", datosRankings);
         setRankings(datosRankings);
-        setLoading(false);
       } catch (error) {
         console.error("Error al cargar los rankings:", error);
+      } finally {
         setLoading(false);
       }
     }

@@ -12,16 +12,12 @@ export default function Inicio() {
           Regístrate y prueba nuestro juego interactivo de Adivinar Pokémons con pistas y sonidos.
         </p>
       </header>
-
       <div className="video-container">
-        <video autoPlay loop muted className="wallpaper">
-          <source
-            src="https://drive.google.com/uc?export=download&id=19O0x4KkmIbzIppG4tuc4reOxbamTM48I"
-            type="video/mp4"
-          />
-          Tu navegador no soporta el elemento de video.
-        </video>
-      </div>
+  <video autoPlay loop muted className="wallpaper">
+    <source src="/videos/wallpaper.mp4" type="video/mp4" />
+    Tu navegador no soporta el elemento de video.
+  </video>
+</div>
 
       <section className="landing-content">
         <div className="landing-feature">

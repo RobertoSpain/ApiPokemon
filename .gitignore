@@ -11,8 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
-public/gengar.mp4
 
+# Excluir todo en `public/` excepto `gengar.mp4`
+public/*
+!public/gengar.mp4
 
 # Editor directories and files
 .vscode/*

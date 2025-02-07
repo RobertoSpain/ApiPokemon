@@ -2,7 +2,10 @@ import "./App.css"; // Mantén los estilos en este archivo
 
 export default function Inicio() {
   return (
-    <div className="landing-container" style={{ backgroundImage: 'url("/path/to/background-image.jpg")' }}>
+    <div
+      className="landing-container"
+      style={{ backgroundImage: 'url("/path/to/background-image.jpg")' }}
+    >
       <header className="landing-header">
         <h1 className="landing-title">¡Bienvenido a la PokeApi !</h1>
         <p className="landing-subtitle">
@@ -12,7 +15,10 @@ export default function Inicio() {
 
       <div className="video-container">
         <video autoPlay loop muted className="wallpaper">
-          <source src="/gengar.mp4" type="video/mp4" />
+          <source
+            src="https://drive.google.com/uc?export=download&id=19O0x4KkmIbzIppG4tuc4reOxbamTM48I"
+            type="video/mp4"
+          />
           Tu navegador no soporta el elemento de video.
         </video>
       </div>
